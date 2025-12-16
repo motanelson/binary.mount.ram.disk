@@ -1,4 +1,4 @@
-seps="\x00\x06\x01\x05"
+seps=b"\x00\x06\x01\x05"
 print("\033c\033[40;37m\ngive me a file to mount list ? ")
 i=input()
 f1=open(i,"r")
@@ -7,16 +7,18 @@ f1.close()
 index=0;
 ii=i.replace(".txt",".dat")
 fff=ff.split(",")
-f2=open(ii,"w")
+f2=open(ii,"wb")
 
 names=""
 for f in fff:    
-    names=f
-    
-    f1=open(names,"r")
+    names=f.strip()
+    g=b""
+    print(names)
+    f1=open(names,"rb")
     g=f1.read()
     f1.close()
-    g=seps+f+seps+g
+    ff=f.encode("utf-8")
+    g=seps+ff+seps+g
     f2.write(g)
 f2.write(seps)
 f2.close()
